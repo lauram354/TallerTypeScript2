@@ -3,8 +3,12 @@ import { series} from './data.js';
 
 let seriesTbody: HTMLElement = document.getElementById('series')!;
 const averageSeasonsElm: HTMLElement = document.getElementById("average-seasons")!;
-const cardBody: HTMLElement = document.getElementById("cards")!;
-
+let cardBody: HTMLElement = document.getElementById("cards")!;
+if (!cardBody) {
+    cardBody = document.createElement("div");
+    cardBody.id = "cards";
+    document.body.appendChild(cardBody);
+}
 
 
 renderSeriesInTable(series);
@@ -22,11 +26,29 @@ function renderSeriesInTable(series: Serie[]): void{
         seriesTbody.appendChild(trElement);
 
         const moreInfoBtn: HTMLElement =  document.getElementById(`more-info-${serie.name}`)!;
-        moreInfoBtn.addEventListener("click", ()=> {
-            showMoreInfo(serie);
-        });
-        
-    
+        moreInfoBtn.onclick = () => showMoreInfo(serie);
+
+        let cardElement = document.createElement("div");
+        cardElement.className = "card";
+        cardElement.id = `card-${serie.name}`;
+        cardElement.style.display = "none";
+        cardElement.style.width = "18rem";
+        let imgElement = new Image();
+        imgElement.id = "imagen"
+        imgElement.style.width = "100%"; 
+        imgElement.style.height = "auto"; 
+        imgElement.style.objectFit = "cover"; 
+        let textElement = document.createElement("h3");
+        textElement.id = "nombre"
+        let descElement = document.createElement("p");
+        descElement.id = "descrip"
+        let linkElement = document.createElement("a");
+        linkElement.id = "link"
+        cardBody.appendChild(cardElement);
+        cardBody.appendChild(imgElement);
+        cardBody.appendChild(textElement);
+        cardBody.appendChild(descElement);
+        cardBody.appendChild(linkElement);
 
     });
 }
@@ -41,12 +63,12 @@ function getAverageSeasons(series: Serie[]): number {
 }
 
 function showMoreInfo(serie: Serie): void{
-    createCard(serie);
-    const imageCard = document.getElementById(`img-${serie.name}`)! as HTMLImageElement;
+    hideAll(series)
+    const imageCard = document.getElementById("imagen")! as HTMLImageElement;
 
     imageCard.src = serie.image;
     imageCard.alt = serie.name;
-    imageCard.width = 250;
+    
 
     const textElement: HTMLElement = document.getElementById("nombre")!;
     textElement.innerText = serie.name;
@@ -61,26 +83,13 @@ function showMoreInfo(serie: Serie): void{
 
     const card: HTMLElement = document.getElementById(`card-${serie.name}`)!;
     card.style.display = "flex";
-
     
 }
 
-    
-function createCard(serie: Serie):void{
-    let cardElement = document.createElement("div");
-    cardElement.className = "card";
-    cardElement.id = `card-${serie.name}`;
-    cardBody.appendChild(cardElement);
-    let imgElement = document.createElement("img");
-    imgElement.id = `img-${serie.name}`
-    let textElement = document.createElement("h3");
-    textElement.id = `name-${serie.name}`
-    let descElement = document.createElement("p");
-    descElement.id = `descrip-${serie.name}`
-    let linkElement = document.createElement("a");
-    linkElement.id = `link-${serie.name}`
-    cardBody.appendChild(imgElement);
-    cardBody.appendChild(textElement);
-    cardBody.appendChild(descElement);
-    cardBody.appendChild(linkElement);
+function hideAll(series: Serie[]):void{
+    series.forEach((serie) => {
+        let moreInfoCard: HTMLElement = document.getElementById(`card-${serie.name}`)!;
+        moreInfoCard.style.display= "none";
+    });
 }
+    
