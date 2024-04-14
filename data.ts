@@ -8,15 +8,15 @@ export const series = [
     "https://www.netflix.com/co/title/70242311","https://www.jguru.com/wp-content/uploads/2021/07/oitnb-s6-horizontal-main-rgb.jpg"),
     
     new Serie (3, "Game of Thrones","HBO", 7, "American fantasy drama", "https://www.hbo.com/game-of-thrones",
-      "https://i.imgur.com/TDCEV1S.jpeg"),
+      "https://bandai.com.mx/blog/wp-content/uploads/2019/04/Jon-Snow-y-el-trono-1024x576.jpg"),
 
     new Serie (4, "The Big Bang Theory", "CBS", 12, "Leonard and Sheldon are brilliant physicists—geniuses in the laboratory but socially challenged everywhere else. Enter beautiful, street-smart neighbor Penny, who aims to teach them a thing or two about life. Despite their on-again, off-again relationship in the past, Leonard and Penny have finally gotten married. Even Sheldon has found a female companion, entering into a relationship agreement with neurobiologist Amy Farrah Fowler, and he recently took their relationship to the next level by marrying her after a long courtship. In their free time, Leonard and Sheldon enjoy fantasy role-playing games with their ever-expanding universe of friends, including fellow scientists Koothrappali, Wolowitz, and Wolowitz’s adorable microbiologist wife, Bernadette, who is adjusting to life with their two children.",
-        "https://www.cbs.com/shows/big_bang_theory/about/", "https://i.imgur.com/uAEpVWk.jpeg"),
+        "https://www.cbs.com/shows/big_bang_theory/about/", "https://www.lifeboxset.com/wp-content/uploads/2019/02/20190211_170119084061-the-big-bang-theory.jpg"),
     
     new Serie (5, "Sherlock", "BBC",  4, "Sherlock depicts consulting detective Sherlock Holmes (Benedict Cumberbatch) solving various mysteries in modern-day London. Holmes is assisted by his flatmate and friend, Dr John Watson (Martin Freeman), who has returned from military service in Afghanistan with the Royal Army Medical Corps",
-        "https://www.bbc.co.uk/programmes/b018ttws", "https://i.imgur.com/02B7qhj.jpeg"),
+        "https://www.bbc.co.uk/programmes/b018ttws", "https://theboar.org/wp-content/uploads/2021/01/sherlock.jpg"),
 
     new Serie (6, "A Very English Scandal", "BBC", 2, "A Very English Scandal is a fact-based three-part British television comedy-drama miniseries based on John Preston's book of the same name.",
-        "https://www.bbc.co.uk/programmes/p065smy4", "https://i.imgur.com/D4y3DrQ.jpeg"),
+        "https://www.bbc.co.uk/programmes/p065smy4", "https://d-tm.ppstatic.pl/kadry/8e/5f/19e8715a69feb8bcacfef2c95881.1000.jpg"),
   ];
   
