@@ -2,11 +2,6 @@ import { series } from './data.js';
 var seriesTbody = document.getElementById('series');
 var averageSeasonsElm = document.getElementById("average-seasons");
 var cardBody = document.getElementById("cards");
-if (!cardBody) {
-    cardBody = document.createElement("div");
-    cardBody.id = "cards";
-    document.body.appendChild(cardBody);
-}
 renderSeriesInTable(series);
 averageSeasonsElm.innerHTML = "".concat(getAverageSeasons(series));
 function renderSeriesInTable(series) {
@@ -16,12 +11,9 @@ function renderSeriesInTable(series) {
         trElement.innerHTML = "<td>".concat(serie.rank, "</td>\n                                <td><a id=\"more-info-").concat(serie.name, "\" href=\"#card-").concat(serie.name, "\"> ").concat(serie.name, "</a></td>\n                                <td>").concat(serie.channel, "</td>\n                                <td>").concat(serie.seasons, "</td>");
         seriesTbody.appendChild(trElement);
         var moreInfoBtn = document.getElementById("more-info-".concat(serie.name));
-        moreInfoBtn.onclick = function () { return showMoreInfo(serie); };
-        var cardElement = document.createElement("div");
-        cardElement.className = "card";
-        cardElement.id = "card-".concat(serie.name);
-        cardElement.style.display = "none";
-        cardBody.appendChild(cardElement);
+        moreInfoBtn.addEventListener("click", function () {
+            showMoreInfo(serie);
+        });
     });
 }
 function getAverageSeasons(series) {
@@ -32,34 +24,37 @@ function getAverageSeasons(series) {
     return averageSeasons;
 }
 function showMoreInfo(serie) {
-    var moreInfoCard = document.getElementById("card-".concat(serie.name));
-    var imgElement = new Image();
-    imgElement.src = serie.image;
-    imgElement.alt = serie.name;
-    imgElement.width = 250;
-    var textElement = document.createElement("h3");
+    createCard(serie);
+    var imageCard = document.getElementById("img-".concat(serie.name));
+    imageCard.src = serie.image;
+    imageCard.alt = serie.name;
+    imageCard.width = 250;
+    var textElement = document.getElementById("nombre");
     textElement.innerText = serie.name;
-    var descElement = document.createElement("p");
+    var descElement = document.getElementById("descrip");
     descElement.innerText = serie.description;
-    var linkElement = document.createElement("a");
+    var linkElement = document.getElementById("link");
     linkElement.href = serie.link;
     linkElement.target = "_blank";
     linkElement.innerText = serie.link;
-    moreInfoCard.appendChild(imgElement);
-    moreInfoCard.appendChild(textElement);
-    moreInfoCard.appendChild(descElement);
-    moreInfoCard.appendChild(linkElement);
-    if (moreInfoCard.style.display == "flex") {
-        moreInfoCard.style.display = "none";
-    }
-    else {
-        hideAll(series);
-        moreInfoCard.style.display = "flex";
-    }
+    var card = document.getElementById("card-".concat(serie.name));
+    card.style.display = "flex";
 }
-function hideAll(series) {
-    series.forEach(function (serie) {
-        var moreInfoCard = document.getElementById("card-".concat(serie.name));
-        moreInfoCard.style.display = "none";
-    });
+function createCard(serie) {
+    var cardElement = document.createElement("div");
+    cardElement.className = "card";
+    cardElement.id = "card-".concat(serie.name);
+    cardBody.appendChild(cardElement);
+    var imgElement = document.createElement("img");
+    imgElement.id = "img-".concat(serie.name);
+    var textElement = document.createElement("h3");
+    textElement.id = "name-".concat(serie.name);
+    var descElement = document.createElement("p");
+    descElement.id = "descrip-".concat(serie.name);
+    var linkElement = document.createElement("a");
+    linkElement.id = "link-".concat(serie.name);
+    cardBody.appendChild(imgElement);
+    cardBody.appendChild(textElement);
+    cardBody.appendChild(descElement);
+    cardBody.appendChild(linkElement);
 }
