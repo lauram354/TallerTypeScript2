@@ -49,5 +49,17 @@ function showMoreInfo(serie) {
     moreInfoCard.appendChild(textElement);
     moreInfoCard.appendChild(descElement);
     moreInfoCard.appendChild(linkElement);
-    moreInfoCard.style.display = "flex";
+    if (moreInfoCard.style.display == "flex") {
+        moreInfoCard.style.display = "none";
+    }
+    else {
+        hideAll(series);
+        moreInfoCard.style.display = "flex";
+    }
+}
+function hideAll(series) {
+    series.forEach(function (serie) {
+        var moreInfoCard = document.getElementById("card-".concat(serie.name));
+        moreInfoCard.style.display = "none";
+    });
 }

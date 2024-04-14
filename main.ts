@@ -3,12 +3,8 @@ import { series} from './data.js';
 
 let seriesTbody: HTMLElement = document.getElementById('series')!;
 const averageSeasonsElm: HTMLElement = document.getElementById("average-seasons")!;
-let cardBody: HTMLElement = document.getElementById("cards")!;
-if (!cardBody) {
-    cardBody = document.createElement("div");
-    cardBody.id = "cards";
-    document.body.appendChild(cardBody);
-}
+const cardBody: HTMLElement = document.getElementById("cards")!;
+
 
 
 renderSeriesInTable(series);
@@ -26,13 +22,12 @@ function renderSeriesInTable(series: Serie[]): void{
         seriesTbody.appendChild(trElement);
 
         const moreInfoBtn: HTMLElement =  document.getElementById(`more-info-${serie.name}`)!;
-        moreInfoBtn.onclick = () => showMoreInfo(serie);
+        moreInfoBtn.addEventListener("click", ()=> {
+            showMoreInfo(serie);
+        });
+        
+    
 
-        let cardElement = document.createElement("div");
-        cardElement.className = "card";
-        cardElement.id = `card-${serie.name}`;
-        cardElement.style.display = "none";
-        cardBody.appendChild(cardElement);
     });
 }
 
@@ -46,27 +41,46 @@ function getAverageSeasons(series: Serie[]): number {
 }
 
 function showMoreInfo(serie: Serie): void{
-    const moreInfoCard: HTMLElement = document.getElementById(`card-${serie.name}`)!;
-    let imgElement = new Image();
-    imgElement.src = serie.image;
-    imgElement.alt = serie.name;
-    imgElement.width = 250;
-    let textElement = document.createElement("h3");
+    createCard(serie);
+    const imageCard = document.getElementById(`img-${serie.name}`)! as HTMLImageElement;
+
+    imageCard.src = serie.image;
+    imageCard.alt = serie.name;
+    imageCard.width = 250;
+
+    const textElement: HTMLElement = document.getElementById("nombre")!;
     textElement.innerText = serie.name;
-    let descElement = document.createElement("p");
+
+    const descElement: HTMLElement = document.getElementById("descrip")!;
     descElement.innerText = serie.description;
-    let linkElement = document.createElement("a");
+
+    const linkElement: HTMLAnchorElement = document.getElementById("link")! as HTMLAnchorElement;
     linkElement.href = serie.link;
     linkElement.target = "_blank";
     linkElement.innerText = serie.link;
 
-    moreInfoCard.appendChild(imgElement);
-    moreInfoCard.appendChild(textElement);
-    moreInfoCard.appendChild(descElement);
-    moreInfoCard.appendChild(linkElement);
+    const card: HTMLElement = document.getElementById(`card-${serie.name}`)!;
+    card.style.display = "flex";
+
     
-
-    moreInfoCard.style.display = "flex";
-
 }
 
+    
+function createCard(serie: Serie):void{
+    let cardElement = document.createElement("div");
+    cardElement.className = "card";
+    cardElement.id = `card-${serie.name}`;
+    cardBody.appendChild(cardElement);
+    let imgElement = document.createElement("img");
+    imgElement.id = `img-${serie.name}`
+    let textElement = document.createElement("h3");
+    textElement.id = `name-${serie.name}`
+    let descElement = document.createElement("p");
+    descElement.id = `descrip-${serie.name}`
+    let linkElement = document.createElement("a");
+    linkElement.id = `link-${serie.name}`
+    cardBody.appendChild(imgElement);
+    cardBody.appendChild(textElement);
+    cardBody.appendChild(descElement);
+    cardBody.appendChild(linkElement);
+}
