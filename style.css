@@ -1,0 +1,8 @@
+#encabezado {
+    background-color: rgb(53, 163, 194); /* Change this to any color you want */
+}
+
+#logo{
+    display: flex;
+    align-items: center;
+}
