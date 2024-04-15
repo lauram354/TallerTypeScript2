@@ -34,21 +34,24 @@ function renderSeriesInTable(series: Serie[]): void{
         cardElement.style.display = "none";
         cardElement.style.width = "18rem";
         let imgElement = new Image();
-        imgElement.id = "imagen"
+        imgElement.id = `imagen-${serie.name}`;
         imgElement.style.width = "100%"; 
         imgElement.style.height = "auto"; 
         imgElement.style.objectFit = "cover"; 
         let textElement = document.createElement("h3");
-        textElement.id = "nombre"
+        textElement.id = `nombre-${serie.name}`;
+        textElement.style.padding = "10px";
         let descElement = document.createElement("p");
-        descElement.id = "descrip"
+        descElement.id = `descrip-${serie.name}`;
+        descElement.style.padding = "10px";
         let linkElement = document.createElement("a");
-        linkElement.id = "link"
+        linkElement.id = `link-${serie.name}`;
+        linkElement.style.padding = "10px";
         cardBody.appendChild(cardElement);
-        cardBody.appendChild(imgElement);
-        cardBody.appendChild(textElement);
-        cardBody.appendChild(descElement);
-        cardBody.appendChild(linkElement);
+        cardElement.appendChild(imgElement);
+        cardElement.appendChild(textElement);
+        cardElement.appendChild(descElement);
+        cardElement.appendChild(linkElement);
 
     });
 }
@@ -64,19 +67,19 @@ function getAverageSeasons(series: Serie[]): number {
 
 function showMoreInfo(serie: Serie): void{
     hideAll(series)
-    const imageCard = document.getElementById("imagen")! as HTMLImageElement;
+    const imageCard = document.getElementById(`imagen-${serie.name}`)! as HTMLImageElement;
 
     imageCard.src = serie.image;
     imageCard.alt = serie.name;
     
 
-    const textElement: HTMLElement = document.getElementById("nombre")!;
+    const textElement: HTMLElement = document.getElementById(`nombre-${serie.name}`)!;
     textElement.innerText = serie.name;
 
-    const descElement: HTMLElement = document.getElementById("descrip")!;
+    const descElement: HTMLElement = document.getElementById(`descrip-${serie.name}`)!;
     descElement.innerText = serie.description;
 
-    const linkElement: HTMLAnchorElement = document.getElementById("link")! as HTMLAnchorElement;
+    const linkElement: HTMLAnchorElement = document.getElementById(`link-${serie.name}`)! as HTMLAnchorElement;
     linkElement.href = serie.link;
     linkElement.target = "_blank";
     linkElement.innerText = serie.link;

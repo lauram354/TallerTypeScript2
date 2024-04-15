@@ -23,21 +23,24 @@ function renderSeriesInTable(series) {
         cardElement.style.display = "none";
         cardElement.style.width = "18rem";
         var imgElement = new Image();
-        imgElement.id = "imagen";
+        imgElement.id = "imagen-".concat(serie.name);
         imgElement.style.width = "100%";
         imgElement.style.height = "auto";
         imgElement.style.objectFit = "cover";
         var textElement = document.createElement("h3");
-        textElement.id = "nombre";
+        textElement.id = "nombre-".concat(serie.name);
+        textElement.style.padding = "10px";
         var descElement = document.createElement("p");
-        descElement.id = "descrip";
+        descElement.id = "descrip-".concat(serie.name);
+        descElement.style.padding = "10px";
         var linkElement = document.createElement("a");
-        linkElement.id = "link";
+        linkElement.id = "link-".concat(serie.name);
+        linkElement.style.padding = "10px";
         cardBody.appendChild(cardElement);
-        cardBody.appendChild(imgElement);
-        cardBody.appendChild(textElement);
-        cardBody.appendChild(descElement);
-        cardBody.appendChild(linkElement);
+        cardElement.appendChild(imgElement);
+        cardElement.appendChild(textElement);
+        cardElement.appendChild(descElement);
+        cardElement.appendChild(linkElement);
     });
 }
 function getAverageSeasons(series) {
@@ -49,14 +52,14 @@ function getAverageSeasons(series) {
 }
 function showMoreInfo(serie) {
     hideAll(series);
-    var imageCard = document.getElementById("imagen");
+    var imageCard = document.getElementById("imagen-".concat(serie.name));
     imageCard.src = serie.image;
     imageCard.alt = serie.name;
-    var textElement = document.getElementById("nombre");
+    var textElement = document.getElementById("nombre-".concat(serie.name));
     textElement.innerText = serie.name;
-    var descElement = document.getElementById("descrip");
+    var descElement = document.getElementById("descrip-".concat(serie.name));
     descElement.innerText = serie.description;
-    var linkElement = document.getElementById("link");
+    var linkElement = document.getElementById("link-".concat(serie.name));
     linkElement.href = serie.link;
     linkElement.target = "_blank";
     linkElement.innerText = serie.link;
